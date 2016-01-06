@@ -1,0 +1,28 @@
+{
+  "name": "pact-js-provider-test",
+  "version": "0.0.1",
+  "description": "A test case for providers in js",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register"
+  },
+  "keywords": [
+    "pact",
+    "js",
+    "provider"
+  ],
+  "author": "Elliott Murray",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.3.26",
+    "babel-cli": "^6.3.17",
+    "babel-core": "^6.3.26",
+    "babel-plugin-transform-class-properties": "^6.3.13"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-things": "^0.2.0",
+    "expect": "^1.13.4",
+    "mocha": "^2.3.4"
+  }
+}

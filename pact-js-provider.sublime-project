@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/elliottmurray/dev/pact/pact-js-provider-test"
+		},
+		{
+			"path": "/Users/elliottmurray/dev/pact/provider-state-server-poc"
+		},
+		{
+			"path": "/Users/elliottmurray/dev/pact/pact"
+		},
+		{
+			"path": "/Users/elliottmurray/dev/pact/pact-provider-proxy"
+		},
+		{
+			"path": "/Users/elliottmurray/dev/pact/pact-js-provider"
+		}
+	]
+}
