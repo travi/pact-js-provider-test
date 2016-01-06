@@ -4,7 +4,7 @@
   "description": "A test case for providers in js",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register"
+    "test": "NODE_ENV=test mocha --reporter list --recursive --compilers js:babel-core/register"
   },
   "keywords": [
     "pact",
