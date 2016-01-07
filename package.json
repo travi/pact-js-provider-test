@@ -4,7 +4,9 @@
   "description": "A test case for providers in js",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --reporter list --recursive --compilers js:babel-core/register"
+    "start": "./node_modules/.bin/babel-node index.js",
+    "test": "NODE_ENV=test mocha --reporter list --recursive --compilers js:babel-core/register",
+    "pactVerify": "./node_modules/.bin/babel-node index.js"
   },
   "keywords": [
     "pact",
@@ -17,7 +19,10 @@
     "babel": "^6.3.26",
     "babel-cli": "^6.3.17",
     "babel-core": "^6.3.26",
-    "babel-plugin-transform-class-properties": "^6.3.13"
+    "babel-plugin-transform-class-properties": "^6.3.13",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",
