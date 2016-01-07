@@ -3,7 +3,7 @@ import Pact from 'pact-js'
 
 Pact.serviceProvider("fooProvider", () => {
   honoursPactWith('fooConsumer', () => {
-    pactUri('pacts/fooConsumer.json')
+    pactUri('pacts/fooconsumer-fooprovider.json')
   }
 })
 

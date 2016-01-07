@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/babel-node index.js",
+    "stop": "pkill -f providerTest",
     "test": "NODE_ENV=test mocha --reporter list --recursive --compilers js:babel-core/register",
     "pactVerify": "./node_modules/.bin/babel-node index.js"
   },
