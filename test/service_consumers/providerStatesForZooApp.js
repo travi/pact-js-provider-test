@@ -1,4 +1,5 @@
-Pact.provider_states_for("Zoo App", () => {
+
+Pact.providerStatesFor("Zoo App", () => {
   setUp( () => {
    // AnimalService::DATABASE[:animals].truncate
   })

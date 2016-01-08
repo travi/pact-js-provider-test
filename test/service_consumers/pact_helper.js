@@ -1,19 +1,31 @@
-import Pact from 'pact-js'
+'use strict';
 
+import {Pact} from '../../src/pact'
 
-Pact.serviceProvider("fooProvider", () => {
+let pact = new Pact()
+
+pact.serviceProvider("fooProvider", () => {
   honoursPactWith('fooConsumer', () => {
     pactUri('pacts/fooconsumer-fooprovider.json')
-  }
+  })
 })
 
-Pact.providerStatesFor('fooConsumer', () => {
+pact.providerStatesFor('fooConsumer', () => {
 
-  providerState('fooConsumer', () => {
-
-    setup( () => {
+  pact.providerState('fooState1', () => {
+    console.log('11111')
+    pact.setup( () => {
+      console.log('setup1')
       //block here
     })
   })
-})
+
+  pact.providerState('fooState2', () => {
+
+    pact.setup( () => {
+      console.log('setup2')
+      //block here
+    })
+  })
+}).verify()
 
