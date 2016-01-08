@@ -1,41 +1,42 @@
 'use strict';
+import q from 'q';
 
 export class Pact {
   constructor(options) {
     console.log('created pact instance')
-    this.providerStates = {}
+    this.providers = {}
   }
 
-  serviceProvider(providerName, callback) {
-    // todo
-  }
-
-  providerStatesFor(providerName, statesToRun) {
-    console.log('adding ' + providerName)
-    this.providerStates[providerName] = statesToRun
-    console.log(this.providerStates)
+  provider(providerName, statesToRun) {
+    this.providers[providerName] = statesToRun
     return this
   }
 
   providerState(stateName, providerStateTests) {
-    console.log('providerState ' + stateName)
-    console.log(providerStateTests)
-    providerStateTests.apply()
+    if(providerStateTests != undefined) {
+      providerStateTests.setup.apply()
+    }
+    let {setup, execute, teardown} = providerStateTests
+
+    this._runStage.apply(setup)
+      .then(this._runStage(execute))
+      .then(this._runStage(teardown))
+
   }
 
-  setup(setupFn) {
-    console.log('in pact setup')
-    setupFn.apply()
-    console.log('setup')
+  _runStage(method) {
+    let deferred = q.defer()
+    if(method != undefined) {
+      method.apply(this, [deferred])
+    }
+    return deferred.promise
   }
 
   verify() {
     console.log('verifys fn')
-    this.providerStates.fooConsumer.apply()
+    this.providers.fooConsumer.apply()
     console.log('verfiged')
   }
-
-
 }
 
 export class ProviderState {
