@@ -38,15 +38,3 @@ export class Pact {
     console.log('verfiged')
   }
 }
-
-export class ProviderState {
-  constructor(providerState, setupFn) {
-    this.providerState = providerState
-    this.setupFn = setupFn
-  }
-
-  doSetup() {
-    this.setupFn.apply()
-  }
-
-}

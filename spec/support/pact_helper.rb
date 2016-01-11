@@ -4,15 +4,18 @@ require 'sequel'
 require 'db'
 require 'animal_repository'
 require 'faraday'
+require 'rack/reverse_proxy'
 
-# require "./spec/service_consumers/provider_states_for_zoo_app"
+Pact.service_provider "Animal Service" do
+  app do
+    Rack::ReverseProxy.new do
+      reverse_proxy '/', ENV.fetch('PACT_PROVIDER_BASE_URL')
+    end
+  end
+end
 
-# Pact.service_provider 'Animal Service' do
+require ENV['PACT_PROJECT_PACT_HELPER'] if ENV.fetch('PACT_PROJECT_PACT_HELPER','') != ''
 
-#   honours_pact_with "Zoo App" do
-#     pact_uri './pacts/zoo_app-animal_service.json'
-#   end
-# end
 module ProviderStateServerClient
 
   def set_up_state provider_state
@@ -30,12 +33,12 @@ end
 Pact.provider_states_for "Zoo App" do
 
   set_up do
-    AnimalService::DATABASE[:animals].truncate
+    # AnimalService::DATABASE[:animals].truncate
   end
 
   provider_state "there is an alligator named Mary" do
     set_up do
-      AnimalService::DATABASE[:animals].insert(name: 'Mary')
+      # AnimalService::DATABASE[:animals].insert(name: 'Mary')
     end
   end
 
@@ -45,7 +48,7 @@ Pact.provider_states_for "Zoo App" do
 
   provider_state "an error occurs retrieving an alligator" do
     set_up do
-      allow(AnimalService::AnimalRepository).to receive(:find_alligator_by_name).and_raise("Argh!!!")
+      # allow(AnimalService::AnimalRepository).to receive(:find_alligator_by_name).and_raise("Argh!!!")
     end
   end
 end

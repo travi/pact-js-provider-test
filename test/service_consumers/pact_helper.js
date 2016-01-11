@@ -1,9 +1,8 @@
 'use strict';
-import childProcess from 'child_process'
 import q from 'q';
 
 import {Pact} from '../../src/pact'
-
+import {rakeVerify} from '../../src/rubyVerifier'
 let pact = new Pact()
 
 // pact.serviceProvider("fooProvider", () => {
@@ -15,6 +14,7 @@ let pact = new Pact()
 pact.provider('fooConsumer', () => {
 
   pact.providerState('fooState1', {
+    file: './pacts/zoo_app-animal_service.json',
     setup: (deferred) => {
       console.log('setup1')
     },
@@ -22,27 +22,13 @@ pact.provider('fooConsumer', () => {
     execute:(deferred) => {
       console.log('execute')
 
-      childProcess.exec('bundle exec rake pact:verify:javascript', (error, stdout) => {
-        console.log('exec bundle here')
-        console.log(stdout.toString());
-        if (error) {
-            console.log(error)
-            deferred.reject(new Error('pact:verify failed: ' + error.message))
-        } else {
-            console.log('success')
-            deferred.resolve();
-        }
-      });
-      console.log('executedddd')
-      return deferred.promise
-
-      //block here
+      return rakeVerify({"pactUrl":'./pacts/zoo_app-animal_service.json',
+        "baseUrl": 'http://localhost:5000'})
     },
 
     teardown: (deferred) => {
       console.log('teardown')
       return deferred.promise
-      //block here
     }
 
   })

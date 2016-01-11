@@ -8,13 +8,13 @@ app.use(morgan('dev'))
 let port = process.env.PORT || 5000
 
 
-let maryStatus = 418;
-let maryResponse = {im: 'a teapot'};
+let maryStatus = 200;
+let maryResponse = {name: 'Mary'};
 
 app.use(bodyParser.json());
 
 app.get('/alligators/Mary', (request, response) => {
-  response.set('Content-Type', 'application/json; charset=utf-8');
+  response.set('Content-Type', 'application/json;charset=utf-8');
   response.status(maryStatus).send(maryResponse);
 });
 
