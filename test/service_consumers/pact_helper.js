@@ -1,7 +1,7 @@
 'use strict';
 import q from 'q';
 
-import {Pact} from '../../src/pact'
+import {Pact} from 'pact-js-provider'
 import {rakeVerify} from '../../src/rubyVerifier'
 let pact = new Pact()
 
