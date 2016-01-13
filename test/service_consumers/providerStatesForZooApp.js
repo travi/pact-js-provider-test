@@ -1,5 +1,8 @@
+import {Pact} from '../../src/pact'
 
-Pact.providerStatesFor("Zoo App", () => {
+let pact = new Pact()
+
+pact.provider("Zoo App", () => {
   setUp( () => {
    // AnimalService::DATABASE[:animals].truncate
   })
