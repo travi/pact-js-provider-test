@@ -2,7 +2,6 @@
 import q from 'q';
 
 import Pact from 'pact-js-provider'
-import {rakeVerify} from '../../src/rubyVerifier'
 let pact = new Pact()
 
 // pact.serviceProvider("fooProvider", () => {
@@ -22,7 +21,7 @@ pact.provider('fooConsumer', () => {
     execute:(deferred) => {
       console.log('execute')
 
-      return rakeVerify({"pactUrl":'./pacts/zoo_app-animal_service.json',
+      return pact.rakeVerify({"pactUrl":'./pacts/zoo_app-animal_service.json',
         "baseUrl": 'http://localhost:5000'})
     },
 
