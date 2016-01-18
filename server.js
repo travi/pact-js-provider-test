@@ -14,13 +14,29 @@ let maryResponse = {name: 'Mary'};
 app.use(bodyParser.json());
 
 app.get('/alligators/Mary', (request, response) => {
-  response.set('Content-Type', 'application/json;charset=utf-8');
+  response.set('Content-Type', 'application/json');
   response.status(maryStatus).send(maryResponse);
 });
 
-app.get("/foos", (req, res) => {
+app.get("/foos", (request, response) => {
+  response.set('Content-Type', 'application/json');
+
   console.log('call foos')
-  res.send([{value:45}, {value:90}])
+  response.send([{value:45}, {value:90}])
+})
+
+app.post("/update/:flagSwitch", (request, response) => {
+  maryStatus = maryStatus == 200 ? 500 : 200
+  let flagSwitch = request.params.flagSwitch
+  console.log(flagSwitch)
+  if (flagSwitch == 'on') {
+    console.log("ONNNNNNNNN")
+  } else {
+    console.log("OFFFFFFFF")
+  }
+  response.set('Content-Type', 'application/json');
+
+  response.send()
 })
 
 app.listen(port, (error) => {

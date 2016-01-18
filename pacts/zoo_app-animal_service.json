@@ -13,13 +13,13 @@
         "method": "get",
         "path": "/alligators/Mary",
         "headers": {
-          "Accept": "application/json"
+          "Accept": "application/json; charset=utf-8"
         }
       },
       "response": {
         "status": 200,
         "headers": {
-          "Content-Type": "application/json;charset=utf-8"
+          "Content-Type": "application/json; charset=utf-8"
         },
         "body": {
           "name": "Mary"
@@ -33,7 +33,7 @@
         "method": "get",
         "path": "/alligators/Mary",
         "headers": {
-          "Accept": "application/json"
+          "Accept": "application/json; charset=utf-8"
         }
       },
       "response": {
@@ -49,13 +49,13 @@
         "method": "get",
         "path": "/alligators/Mary",
         "headers": {
-          "Accept": "application/json"
+          "Accept": "application/json; charset=utf-8"
         }
       },
       "response": {
         "status": 500,
         "headers": {
-          "Content-Type": "application/json;charset=utf-8"
+          "Content-Type": "application/json; charset=utf-8"
         },
         "body": {
           "error": "Argh!!!"
