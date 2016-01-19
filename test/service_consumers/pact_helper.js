@@ -13,7 +13,6 @@ let pact = new Pact()
 
 function switchMary(deferred, turnOn) {
   console.log('switchMary %s', turnOn)
-  console.log(deferred)
 
   let urlPath = turnOn ? 'update/on' : '/update/off'
   let post_options = {
@@ -32,7 +31,7 @@ function switchMary(deferred, turnOn) {
 
 pact.provider_states_for('Zoo App', () => {
 
-  pact.providerState('a request for an alligator', {
+  pact.providerState('there is an alligator named Mary', {
     file: './pacts/zoo_app-animal_service.json',
     setup: (deferred) => {
       console.log('setup1')
@@ -51,7 +50,7 @@ pact.provider_states_for('Zoo App', () => {
 
   })
 
-  pact.providerState('a request for not found an alligator', {
+  pact.providerState('there is not an alligator named Mary', {
     file: './pacts/zoo_app-animal_service.json',
     options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
         "baseUrl": 'http://localhost:5000'},
