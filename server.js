@@ -31,8 +31,10 @@ app.post("/update/:flagSwitch", (request, response) => {
   console.log(flagSwitch)
   if (flagSwitch == 'on') {
     console.log("ONNNNNNNNN")
+    maryStatus = 500
   } else {
     console.log("OFFFFFFFF")
+    maryStatus = 200
   }
   response.set('Content-Type', 'application/json');
 

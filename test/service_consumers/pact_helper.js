@@ -17,7 +17,7 @@ function switchMary(deferred, turnOn) {
 
   let urlPath = turnOn ? 'update/on' : '/update/off'
   let post_options = {
-    uri: 'http://localhost:5000' + urlPath,
+    url: 'http://localhost:5000' + urlPath,
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -30,23 +30,19 @@ function switchMary(deferred, turnOn) {
   return deferred
 }
 
-pact.provider_states_for('fooConsumer', () => {
+pact.provider_states_for('Zoo App', () => {
 
   pact.providerState('a request for an alligator', {
     file: './pacts/zoo_app-animal_service.json',
     setup: (deferred) => {
       console.log('setup1')
-      console.log(deferred)
 
       switchMary(deferred, true)
     },
 
-    execute:(deferred) => {
-      console.log('execute')
+    options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
+        "baseUrl": 'http://localhost:5000'},
 
-      return pact.rakeVerify({"pactUrl":'./pacts/zoo_app-animal_service.json',
-        "baseUrl": 'http://localhost:5000'})
-    },
 
     teardown: (deferred) => {
       console.log('teardown')
@@ -57,17 +53,12 @@ pact.provider_states_for('fooConsumer', () => {
 
   pact.providerState('a request for not found an alligator', {
     file: './pacts/zoo_app-animal_service.json',
+    options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
+        "baseUrl": 'http://localhost:5000'},
 
     setup: (deferred) => {
       console.log('setup2s')
       switchMary(deferred, false)
-    },
-
-    execute:(deferred) => {
-      console.log('execute')
-
-      return pact.rakeVerify({"pactUrl":'./pacts/zoo_app-animal_service.json',
-        "baseUrl": 'http://localhost:5000'})
     },
 
     teardown: (deferred) => {
