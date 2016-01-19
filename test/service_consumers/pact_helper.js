@@ -12,8 +12,6 @@ let pact = new Pact()
 // })
 
 function switchMary(deferred, turnOn) {
-  console.log('switchMary %s', turnOn)
-
   let urlPath = turnOn ? 'update/on' : '/update/off'
   let post_options = {
     url: 'http://localhost:5000' + urlPath,
@@ -34,8 +32,6 @@ pact.provider_states_for('Zoo App', () => {
   pact.providerState('there is an alligator named Mary', {
     file: './pacts/zoo_app-animal_service.json',
     setup: (deferred) => {
-      console.log('setup1')
-
       switchMary(deferred, true)
     },
 
@@ -44,7 +40,6 @@ pact.provider_states_for('Zoo App', () => {
 
 
     teardown: (deferred) => {
-      console.log('teardown')
       return deferred.promise
     }
 
@@ -56,12 +51,10 @@ pact.provider_states_for('Zoo App', () => {
         "baseUrl": 'http://localhost:5000'},
 
     setup: (deferred) => {
-      console.log('setup2s')
       switchMary(deferred, false)
     },
 
     teardown: (deferred) => {
-      console.log('teardown')
       return deferred.promise
     }
   })
