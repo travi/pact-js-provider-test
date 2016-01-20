@@ -38,7 +38,6 @@ pact.provider_states_for('Zoo App', () => {
     options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
         "baseUrl": 'http://localhost:5000'},
 
-
     teardown: (deferred) => {
       return deferred.promise
     }
