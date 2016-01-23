@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 app.get('/alligators/Mary', (request, response) => {
   response.set('Content-Type', 'application/json');
+  console.log(maryStatus)
   response.status(maryStatus).send(maryResponse);
 });
 
@@ -26,15 +27,11 @@ app.get("/foos", (request, response) => {
 })
 
 app.post("/update/:flagSwitch", (request, response) => {
-  maryStatus = maryStatus == 200 ? 500 : 200
   let flagSwitch = request.params.flagSwitch
-  console.log(flagSwitch)
   if (flagSwitch == 'on') {
-    console.log("ONNNNNNNNN")
-    maryStatus = 500
-  } else {
-    console.log("OFFFFFFFF")
     maryStatus = 200
+  } else {
+    maryStatus = 404
   }
   response.set('Content-Type', 'application/json');
 

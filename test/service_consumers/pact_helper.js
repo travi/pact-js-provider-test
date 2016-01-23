@@ -2,6 +2,7 @@
 import q from 'q';
 import rp from 'request-promise'
 
+import request from 'request'
 import Pact from 'pact-js-provider'
 let pact = new Pact()
 
@@ -11,8 +12,8 @@ let pact = new Pact()
 //   })
 // })
 
-function switchMary(deferred, turnOn) {
-  let urlPath = turnOn ? 'update/on' : '/update/off'
+function switchMary(turnOn, done) {
+  let urlPath = turnOn ? '/update/on' : '/update/off'
   let post_options = {
     url: 'http://localhost:5000' + urlPath,
     method: 'POST',
@@ -20,42 +21,49 @@ function switchMary(deferred, turnOn) {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   }
-  deferred.promise
-    .then(rp(post_options))
-    .then(deferred.resolve)
 
-  return deferred
-}
+  request(post_options, (error, req, resp) =>{
+    console.log('callback on request')
+    done()
+  })
+  }
 
 pact.provider_states_for('Zoo App', () => {
 
   pact.providerState('there is an alligator named Mary', {
     file: './pacts/zoo_app-animal_service.json',
-    setup: (deferred) => {
-      switchMary(deferred, true)
+    setup: (done) => {
+      console.log('setup111111')
+      return switchMary(false, done)
     },
 
     options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
         "baseUrl": 'http://localhost:5000'},
 
-    teardown: (deferred) => {
-      return deferred.promise
+    teardown: (done) => {
+      console.log('teardown')
+      done()
     }
 
-  })
+  }).then( () => {
 
-  pact.providerState('there is not an alligator named Mary', {
-    file: './pacts/zoo_app-animal_service.json',
-    options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
-        "baseUrl": 'http://localhost:5000'},
+    pact.providerState('there is not an alligator named Mary', {
+      file: './pacts/zoo_app-animal_service.json',
+      options: {"pactUrl":'./pacts/zoo_app-animal_service.json',
+          "baseUrl": 'http://localhost:5000'},
 
-    setup: (deferred) => {
-      switchMary(deferred, false)
-    },
+      setup: (done) => {
+        console.log('setup22222')
+        return switchMary(false, done)
+        // console.log('setup22222')
+      },
 
-    teardown: (deferred) => {
-      return deferred.promise
-    }
+      teardown: (done) => {
+        console.log('teardown')
+        done()
+        // return
+      }
+    })
   })
 
 }).verify()
