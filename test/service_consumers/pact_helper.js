@@ -1,6 +1,5 @@
 'use strict';
 import q from 'q';
-import rp from 'request-promise'
 
 import request from 'request'
 import Pact from 'pact-js-provider'
